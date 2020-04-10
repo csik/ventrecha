@@ -1,25 +1,25 @@
-import Adafruit_BBIO.GPIO as GPIO 
+import Adafruit_BBIO.GPIO as GPIO # type: ignore
 from time import sleep as sleep
 import machine as machine_cfg
 
-class Valve: 
-    def __init__(self, pin, no_or_nc): 
-        self.pin = pin 
-        self.no_or_nc = no_or_nc 
-        GPIO.setup(self.pin, GPIO.OUT) 
-    
-    def open(self): 
-        GPIO.output(self.pin, self.no_or_nc & 1) 
-    
-    def close(self): 
-        GPIO.output(self.pin, self.no_or_nc & 0) 
+class Valve:
+    def __init__(self, pin: str, no_or_nc: int):
+        self.pin = pin
+        self.no_or_nc = no_or_nc
+        GPIO.setup(self.pin, GPIO.OUT)
+
+    def open(self) -> None:
+        GPIO.output(self.pin, self.no_or_nc & 1)
+
+    def close(self) -> None:
+        GPIO.output(self.pin, self.no_or_nc & 0)
 
 class Hall:
-    def __init__(self, pin):
+    def __init__(self, pin: str):
         self.pin = pin
         GPIO.setup(self.pin, GPIO.IN)
 
-    def get():
+    def get(self) -> int:
         return GPIO.input(self.pin)
 
 
